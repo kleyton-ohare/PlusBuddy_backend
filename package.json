@@ -1,0 +1,27 @@
+{
+	"name": "plusbuddy_backend",
+	"version": "1.0.0",
+	"description": "Serves endpoints for PlusBuddy",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon index.js",
+		"test": "npm test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kleyton-ohare/PlusBuddy_backend.git"
+	},
+	"author": "Kleyton O'Hare",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/kleyton-ohare/PlusBuddy_backend/issues"
+	},
+	"homepage": "https://github.com/kleyton-ohare/PlusBuddy_backend#readme",
+	"dependencies": {
+		"dotenv": "^8.2.0",
+		"fastify": "^3.2.0"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.4"
+	}
+}
