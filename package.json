@@ -19,7 +19,10 @@
 	"homepage": "https://github.com/kleyton-ohare/PlusBuddy_backend#readme",
 	"dependencies": {
 		"dotenv": "^8.2.0",
-		"fastify": "^3.2.0"
+		"fastify": "^3.2.0",
+		"fastify-cors": "^4.1.0",
+		"fastify-swagger": "^3.2.0",
+		"firebase-admin": "^9.0.0"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.4"

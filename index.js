@@ -1,5 +1,7 @@
 // Require the framework and instantiate it
 const fastify = require('fastify')({ logger: true })
+// const swagger = require('./config/swagger');
+const db = require('./config/firestore');
 const dotenv = require('dotenv');
 dotenv.config(); // parses the .env entries to a json format
 
@@ -9,8 +11,18 @@ fastify.get('/', async (request, reply) => {
         appName: 'PlusBuddy',
         title: 'This is the backend serving PlusBuddy app',
         info: 'The app aims to bring information about HIV/AIDS',
+        db
     }
 })
+
+// Register Fastify CORS
+fastify.register(require('fastify-cors'), {
+    origin: true    // enables 'Access-Control-Allow-Origin'
+})
+
+// Register Swagger
+fastify.register(require('fastify-swagger'))
+//, swagger.options);
 
 // Run the server!
 const start = async () => {
