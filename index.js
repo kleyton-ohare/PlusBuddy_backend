@@ -1,6 +1,6 @@
 // Require the framework and instantiate it
 const fastify = require('fastify')({ logger: true })
-// const swagger = require('./config/swagger');
+const swagger = require('./config/swagger');
 const db = require('./config/firestore');
 const dotenv = require('dotenv');
 dotenv.config(); // parses the .env entries to a json format
@@ -21,8 +21,7 @@ fastify.register(require('fastify-cors'), {
 })
 
 // Register Swagger
-fastify.register(require('fastify-swagger'))
-//, swagger.options);
+fastify.register(require('fastify-swagger'), swagger.options);
 
 // Run the server!
 const start = async () => {
