@@ -21,13 +21,13 @@ exports.options = {
             url: 'https://github.com/kleyton-ohare/PlusBuddy_backend',
             description: 'Git repository',
         },
-        host: '',
+        host: 'plusbuddy@example.com',          // UPDATE to from App Engine
         schemes: ['http', 'https'],
         consumes: ['application/json'],
         produces: ['application/json'],
         tags: [             // tags are used to group the end-points
-            { name: '/comment', description: 'Endpoints for comments on articles' },
-            { name: '/suggestion', description: 'Endpoints for suggestions about the app' }
+            { name: 'comments', description: 'Endpoints for comments on articles' },
+            // { name: 'suggestions', description: 'Endpoints for suggestions about the app' }
         ],
         securityDefinitions: {
             apiKey: {
