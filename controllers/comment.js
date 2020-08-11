@@ -1,6 +1,17 @@
 const { FieldValue, db } = require('../config/firestore');
 const comments = db.collection('comments');
 
+// standard data format
+function dataFormat(data) {
+    return {
+        article: data.article,
+        comment: data.comment,
+        isRead: data.isRead,
+        timestamp: new Date(data.timestamp.seconds * 1000)
+    }
+}
+
+// standard error handler
 function errorHandler(err, reply) {
     reply.status(500).send({ error: "Internal server error", info: err.toString() });
 }
@@ -14,7 +25,7 @@ exports.getComments = async (req, reply) => {
             snapshot.forEach(doc => {
                 let temp = {
                     id: doc.id,
-                    data: doc.data()
+                    data: dataFormat(doc.data())
                 }
                 docs.push(temp);
             });
@@ -34,9 +45,9 @@ exports.getSingleComment = async (req, reply) => {
         const id = req.params.id;
         const comment = await comments.doc(id).get();
         if (comment.exists)
-            reply.send(comment.data());
+            reply.send(dataFormat(comment.data()));
         else if (!comment.exists)
-            reply.send({ info: `No such document for id: ${id}!` });
+            reply.send({ info: `No such document for id ${id}!` });
         else
             throw new Error("check \'getSingleComment\' function");
     } catch (err) {
@@ -51,10 +62,13 @@ exports.getFilteredComments = async (req, reply) => {
         let docs = [];
         const timestamp = req.query.timestamp;
         const isRead = req.query.isRead;
-        if (timestamp) {
-            snapshot = await comments.orderBy("timestamp", timestamp).get();
-        } else if (isRead) {
+        if (timestamp && isRead !== undefined) {
             const cond = JSON.parse(isRead);    // convert from string to boolean
+            snapshot = await comments.where("isRead", "=", cond).orderBy("timestamp", timestamp).get(); // indexes must be created
+        } else if (timestamp) {
+            snapshot = await comments.orderBy("timestamp", timestamp).get();
+        } else if (isRead !== undefined) {
+            const cond = JSON.parse(isRead);
             snapshot = await comments.where("isRead", "=", cond).get();
         } else
             throw new Error("no arguments matched any queries. Check \'getFilteredComments\' function");
@@ -63,14 +77,13 @@ exports.getFilteredComments = async (req, reply) => {
             snapshot.forEach(doc => {
                 let temp = {
                     id: doc.id,
-                    data: doc.data()
+                    data: dataFormat(doc.data())
                 }
                 docs.push(temp);
             });
-        }
-        // console.log(docs);
-        reply.send(docs);
-        // const filtered = await comments.orderBy(filter);
+            reply.send(docs);
+        } else
+            throw new Error("snapshot is empty. Check \'getFilteredComments\' function");
     } catch (err) {
         errorHandler(err, reply);
     }
@@ -81,10 +94,34 @@ exports.addComment = async (req, reply) => {
     try {
         const comment = await comments.add({
             ...req.body,                    // fields from the client
-            timestamp: FieldValue.serverTimestamp(),
-            isRead: false
+            isRead: false,
+            timestamp: FieldValue.serverTimestamp()
         });
-        reply.send({ info: `Comment created. ID: ${comment.id}` });
+        if (comment)
+            reply.send({ info: `Comment created for id ${comment.id}` });
+        else
+            throw new Error(`comment not creaated. Check \'addComment\' function`);
+    } catch (err) {
+        errorHandler(err, reply);
+    }
+}
+
+// update a comment
+exports.updateComment = async (req, reply) => {
+    try {
+        const id = req.params.id;
+        const updated = { ...req.body };
+        const comment = await comments.doc(id);
+        const doc = await comment.get();
+        if (doc.exists) {
+            comment.update(updated);
+            reply.send({ info: `document updated for id ${id}`, updated });
+        }
+        else if (!doc.exists)
+            reply.send({ info: `no such document for id ${id}!` });
+        else
+            throw new Error("check \'getSingleComment\' function");
+        // reply.send({ id });
     } catch (err) {
         errorHandler(err, reply);
     }

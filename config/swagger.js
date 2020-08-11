@@ -21,7 +21,7 @@ exports.options = {
             url: 'https://github.com/kleyton-ohare/PlusBuddy_backend',
             description: 'Git repository',
         },
-        host: 'plusbuddy@example.com',          // UPDATE to from App Engine
+        host: 'localhost:8080',          // UPDATE this from App Engine
         schemes: ['http', 'https'],
         consumes: ['application/json'],
         produces: ['application/json'],
@@ -29,6 +29,19 @@ exports.options = {
             { name: 'comments', description: 'Endpoints for comments on articles' },
             // { name: 'suggestions', description: 'Endpoints for suggestions about the app' }
         ],
+        // definitions: {
+        //     User: {
+        //         $id: 'User',
+        //         type: 'object',
+        //         required: ['id', 'email'],
+        //         properties: {
+        //             id: { type: 'string', format: 'uuid' },
+        //             firstName: { type: 'string', nullable: true },
+        //             lastName: { type: 'string', nullable: true },
+        //             email: { type: 'string', format: 'email' }
+        //         }
+        //     }
+        // },
         securityDefinitions: {
             apiKey: {
                 type: 'apiKey',
