@@ -1,11 +1,10 @@
 const admin = require('firebase-admin');
 const serviceAccount = require('../secure/plusbuddy-key.json');
-// const serviceAccount = require('../secure/openplusbuddy-key.json');
 
 // Connection with the database
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-    //credential: admin.credential.applicationDefault()
+    // credential: admin.credential.cert(serviceAccount)
+    credential: admin.credential.applicationDefault()
 });
 
 module.exports = {
