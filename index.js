@@ -1,5 +1,5 @@
 // Require the framework and instantiate it
-const fastify = require('fastify')({ logger: true })
+const fastify = require('fastify')({ logger: true, prettyPrint: true })
 const swagger = require('./config/swagger');
 const routes = require('./routes');
 const dotenv = require('dotenv');
