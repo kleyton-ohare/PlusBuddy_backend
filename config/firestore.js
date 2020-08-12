@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('../secure/plusbuddy-key.json');
+// const serviceAccount = require('../secure/plusbuddy-key.json');
 
 // Connection with the database
 admin.initializeApp({
