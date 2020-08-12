@@ -1,4 +1,6 @@
-// schemas serving for validaty as well as Swagger documentation
+// The schemas below is to generate the Swagger documentation
+// More info:
+// https://www.npmjs.com/package/fastify-swagger
 
 exports.getComments = {
     summary: 'retrives all the comments',
