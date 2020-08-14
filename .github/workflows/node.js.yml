@@ -19,7 +19,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: bash ./.github/scripts/decrypt_secret.sh
+      - name: Decryption
+        run: bash ./.github/scripts/decrypt_secret.sh
         env:
           SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
       - name: Use Node.js ${{ matrix.node-version }}
