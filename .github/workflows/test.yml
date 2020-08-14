@@ -9,8 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Decrypt a secret passphrase
-        run: "hello from test.yml"
-      #  run: ./.github/workflows/decrypt_secret.sh
+        run: ./.github/workflows/decrypt_secret.sh
       #  env:
       #    SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
       # This command is just an example to show your secret being printed
