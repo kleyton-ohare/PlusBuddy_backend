@@ -8,8 +8,8 @@ mkdir secure
 # --batch to prevent interactive command
 # --yes to assume "yes" for questions
 gpg --quiet --batch --yes --decrypt --passphrase="$SECRET_PASSPHRASE" \
-#        to temporary          from original folder
 --output secure/my_secret.json secure/my_secret.json.gpg
+#        to temporary          from original folder > file storage
 
 # Tutorial
 # https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#limits-for-secrets
