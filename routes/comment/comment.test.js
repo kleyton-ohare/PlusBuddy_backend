@@ -1,6 +1,5 @@
 'use strict'
 const build = require('../../app');
-const controllers = require('./controllers');
 
 describe('testing \'api/comments\' routes', () => {
     let app;
