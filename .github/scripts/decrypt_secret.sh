@@ -2,7 +2,7 @@
 
 # Decrypt the file
 
-# create a temporary folder in the VM to store the file
+# create a folder in the VM to store the file
 mkdir secure
 
 # --batch to prevent interactive command
