@@ -6,4 +6,4 @@ mkdir secure
 # --yes to assume "yes" for questions
 
 gpg --quiet --batch --yes --decrypt --passphrase="$SECRET_PASSPHRASE" \
---output secure/my_secret.json my_secret.json.gpg
+--output secure/my_secret.json secure/my_secret.json.gpg

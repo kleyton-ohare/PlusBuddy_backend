@@ -1,5 +1,5 @@
 # Untracked files
 node_modules/
-secure/
+secure/my_secret.json
 .env
 
