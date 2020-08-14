@@ -10,6 +10,12 @@ gpg --quiet --batch --yes --decrypt --passphrase="$SECRET_PASSPHRASE" \
 
 echo "commands:"
 pwd
-cd home/runner/work/PlusBuddy_backend/PlusBuddy_backend
+cd home/runner/work/PlusBuddy_backend
 pwd
+ls -al
+echo "cd ~"
+cd ~
+ls -al
+echo "cd secure"
+cd secure
 ls -al
