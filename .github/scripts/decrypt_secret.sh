@@ -7,3 +7,6 @@ mkdir $HOME/secure
 
 gpg --quiet --batch --yes --decrypt --passphrase="$SECRET_PASSPHRASE" \
 --output $HOME/secure/my_secret.json my_secret.json.gpg
+
+pwd
+ls -al
