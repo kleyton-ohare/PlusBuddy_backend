@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Decrypt the file
-#mkdir $HOME/secure
+mkdir $HOME/secure
 # --batch to prevent interactive command
 # --yes to assume "yes" for questions
 
